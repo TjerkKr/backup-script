@@ -8,7 +8,7 @@ BACKUP_DIR="/local-backup"
 
 BACKUPNAME=""
 
-cat /var/log/syslog >> /opt/backup/syslog
+cat /var/log/syslog > $BACKUP_DIR/syslog
 
 # Hier Verzeichnisse auflisten, die gesichert werden sollen.
 # Dies ist nur ein Beispiel - bitte an eigene Bedürfnisse anpassen.
@@ -18,7 +18,7 @@ cat /var/log/syslog >> /opt/backup/syslog
 SOURCE="/root /etc /home /boot /var /opt"
 
 tar cjpf $BACKUP_DIR/$BACKUPNAME-backup-$DATE.tar.bz2 $SOURCE
-scp -C2 -P 22 -i ~/.ssh/id_rsa.pub /local-backup/*
+scp -C2 -P 22 -i ~/.ssh/id_rsa.pub $BACKUP_DIR/*
 Benutzer@hostname:/backup/
 
-rm /var/log/syslog
+rm $BACKUP_DIR/syslog
